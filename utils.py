@@ -80,7 +80,10 @@ def load_alignment_matrix(alignment_path):
 '''
 =======================================
 ==================Scoring==================
+<<<<<<< HEAD
 Adapted from REGAL implementation: https://github.com/GemsLab/REGAL
+=======
+>>>>>>> 0c0893120134a8eec3d19c14b6e60526bb01a4ff
 =======================================
 '''
 '''Score (soft correspondence) alignment matrix given true alignments'''

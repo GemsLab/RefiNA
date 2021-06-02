@@ -10,12 +10,13 @@ from utils import threshold_alignment_matrix, score_alignment_matrix, kd_align
 from mnc import score_MNC
 
 def refina(alignment_matrix, adj1, adj2, args, true_alignments = None):
-	print(alignment_matrix)
 	'''Automatically set token match'''
 	if args.token_match < 0: #automatically select
 		#reciprocal of smallest power of 10 larger than largest graph #nodes
 		pow_10 = math.log(max(adj1.shape[0], adj2.shape[0]), 10)
 		args.token_match = 10**-int(math.ceil(pow_10))	
+
+	#alignment_matrix = threshold_alignment_matrix(alignment_matrix, topk = args.init_threshold)
 
 	for i in range(args.n_iter):
 		'''DIAGNOSTIC/DEMO ONLY: keep track of alignment quality'''
@@ -29,6 +30,7 @@ def refina(alignment_matrix, adj1, adj2, args, true_alignments = None):
 
 		'''Step 1: compute MNC-based update'''
 		update = compute_update(adj1, adj2, alignment_matrix, args)
+		update = compute_update(adj1, adj2, alignment_matrix, args)#min( int(5*(i+1)), adj1.shape[0]) )
 		
 		'''Step 2: apply update and token match'''
 		if args.n_update > 0: #add token match score here so we can selectively update
